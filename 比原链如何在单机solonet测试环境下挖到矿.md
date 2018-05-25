@@ -50,7 +50,11 @@ numbers. Sign is not really being used.
 有幸在比原技术微信群得到了几位大牛的指点，考虑修改难度系数bits,该系数在**bytom/config/genesis.go**文件中，初始值**Bits:2161727821137910632,**
 
 为了更改**bits**,对代码**bytom/consensus/difficulty/difficulty.go**做如下修改
-
+    
+    //在文件开头的import中加入
+    log "github.com/sirupsen/logrus"
+    
+    //修改函数CheckProofOfWork
 	func CheckProofOfWork(hash, seed *bc.Hash, bits uint64) bool {
 
 	compareHash := tensority.AIHash.Hash(hash, seed)
@@ -75,23 +79,23 @@ numbers. Sign is not really being used.
 
 4.运行**bytomd init --chain_id solonet** 和**bytomd node --minging**命令，在dashboard创建账户，几秒之后在命令行窗口会看见系统的运行信息，接着会得到类似下面的信息
 
-    time="2018-05-18T11:57:11+08:00" level=info msg="false:bits=2305843009219929325"
-    time="2018-05-18T11:57:15+08:00" level=info msg="HashToBig compareHash=94470935200285873636399503116117805657110739921871232222716960430331350467616"
-    time="2018-05-18T11:57:15+08:00" level=info msg="false:bits=2305843009227381927"
-    time="2018-05-18T11:57:16+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-    time="2018-05-18T11:57:19+08:00" level=info msg="HashToBig compareHash=108924585367465724541234689522322789151382457823652479112133953258841671282258
-    time="2018-05-18T11:57:19+08:00" level=info msg="false:bits=2305843009229476129"
-    time="2018-05-18T11:57:23+08:00" level=info msg="HashToBig compareHash=14146428415876784558544863438470231118789865847836167107575618549870912614213"
-    time="2018-05-18T11:57:23+08:00" level=info msg="false:bits=2305843009215743640"
-    time="2018-05-18T11:57:26+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-    time="2018-05-18T11:57:28+08:00" level=info msg="HashToBig compareHash=78934284042892087673033389266663287288908738737936067679514124013738943934592"
-    time="2018-05-18T11:57:28+08:00" level=info msg="false:bits=2305843009225130808"
-    time="2018-05-18T11:57:32+08:00" level=info msg="HashToBig compareHash=55786918064653409850632601440227606224276562392668699194595776719016165547098"
-    time="2018-05-18T11:57:32+08:00" level=info msg="false:bits=2305843009221776966"
-    time="2018-05-18T11:57:36+08:00" level=info msg="HashToBig compareHash=83666295500599103004856267657480156049537933326077567233384721054295899257191"
-    time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"
-    time="2018-05-18T11:57:36+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-    time="2018-05-18T11:57:40+08:00" level=info msg="HashToBig compareHash=22266069092978536339665292252171173599340934438903703233524897266085035107388"
+time="2018-05-18T11:57:11+08:00" level=info msg="false:bits=2305843009219929325"
+time="2018-05-18T11:57:15+08:00" level=info msg="HashToBig compareHash=94470935200285873636399503116117805657110739921871232222716960430331350467616"
+time="2018-05-18T11:57:15+08:00" level=info msg="false:bits=2305843009227381927"
+time="2018-05-18T11:57:16+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+time="2018-05-18T11:57:19+08:00" level=info msg="HashToBig compareHash=108924585367465724541234689522322789151382457823652479112133953258841671282258
+time="2018-05-18T11:57:19+08:00" level=info msg="false:bits=2305843009229476129"
+time="2018-05-18T11:57:23+08:00" level=info msg="HashToBig compareHash=14146428415876784558544863438470231118789865847836167107575618549870912614213"
+time="2018-05-18T11:57:23+08:00" level=info msg="false:bits=2305843009215743640"
+time="2018-05-18T11:57:26+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+time="2018-05-18T11:57:28+08:00" level=info msg="HashToBig compareHash=78934284042892087673033389266663287288908738737936067679514124013738943934592"
+time="2018-05-18T11:57:28+08:00" level=info msg="false:bits=2305843009225130808"
+time="2018-05-18T11:57:32+08:00" level=info msg="HashToBig compareHash=55786918064653409850632601440227606224276562392668699194595776719016165547098"
+time="2018-05-18T11:57:32+08:00" level=info msg="false:bits=2305843009221776966"
+time="2018-05-18T11:57:36+08:00" level=info msg="HashToBig compareHash=83666295500599103004856267657480156049537933326077567233384721054295899257191"
+time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"
+time="2018-05-18T11:57:36+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+time="2018-05-18T11:57:40+08:00" level=info msg="HashToBig compareHash=22266069092978536339665292252171173599340934438903703233524897266085035107388"
 
 信息显示虽然挖矿失败了，但是通过运算我们可以得到很多适合本机难度的bits，每一个**time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"**
 中的bits都适合本机难度，这个**bits**上面对应的**level=info msg="HashToBig compareHash=**后面这个值越大，难度系数就越低。
@@ -133,7 +137,7 @@ numbers. Sign is not really being used.
 9.最后再次说明一定提前备份好btm里自己的重要数据，主要是key,最好整个bytom文件夹做一下备份。这个方法适合于有一定go语言基础的
 程序员们，当然技术大牛们看了会见笑，觉得太简单了。费劲写这么多的主要目的是因为本人喜欢比原链，希望更多的人能够加入进来学习比原
 研究比原，都为比原的发展贡献自己的力量，尽自己的一小点力量。而且在单机模拟环境下练习转账等操作也不会有实际的损失和风险。
-请不要尝试用修改的文件连接主网，会有未知的风险。最后感谢微信比原技术测试群还有群友**Freewind**，**Freewind**是一个既聪明又勤奋的人，
+请不要尝试用修改的文件连接主网，会有未知的风险。最后感谢微信比原技术测试群还有群友**Freewind**，**Freewind**是一个即聪明又勤奋的人，
 没有他就没有这篇文章，大家感兴趣可以去看看他写的<https://github.com/freewind/bytom.win>关于比原的文章。
 
 
