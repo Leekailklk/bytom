@@ -3,11 +3,15 @@
 ***
 （本人是初学者，行文简单和出错在所难免，请大家包涵。）
 
-好多人学习和研究比原，但苦于在主网环境不敢实际操作怕带来损失，在单机solo环境又挖不出代币无法进行测试。本人在
-学习过程中也遇到了类似的问题，简单研究了一下写了如下方法。
+好多人学习和研究比原，但苦于在主网环境不敢实际操作怕带来损失，在单机solo环境又挖不出代币无法进行测试。本人在学习过程中也遇到了类似的问题，简单研究了一下写了如下方法。
 
 
-1. **提前做好文件和钱包的备份。提前做好文件和钱包的备份。提前做好文件和钱包的备份。**
+1. **提前做好文件和钱包的备份。提前做好文件和钱包的备份。提前做好文件和钱包的备份。**  
+  在不同的操作系统上，数据目录的位置也不同  
+  苹果系统(darwin)：~/Library/Bytom  
+  Windows(windows): ~/AppData/Roaming/Bytom  
+  其它（如Linux）：~/.bytom  
+  为了方便，可以把该目录下文件直接拷贝备份，然后**清空该目录（必须要清除原来文件）**。
 
 2. 挖矿的最终工作量证明在**bytom/consensus/difficulty/difficulty.go**
     
@@ -26,6 +30,10 @@
 和**CompactToBig(bits)**的大小，小于预定难度即工作量证明通过.
 
    其中使用AI友好算法生成随机哈希相关论文的下载地址： <https://github.com/Bytom/bytom/wiki/download/tensority-v1.2.pdf>，
+
+原理介绍  
+[https://mp.weixin.qq.com/s?src=11&timestamp=1527638586&ver=907&signature=MPke2SaX2swCC9XFeZ8pE1ydQqsiCjflONTQa7778N-sHtmgSskd8WDN48MoEcRbCY5QYCi4GZi87WihdxNtLOrZ2CH5G8*prn5nWbFdDPuLbH6N-uOqwFzvyZftmnB7&new=1](https://mp.weixin.qq.com/s?src=11&timestamp=1527638586&ver=907&signature=MPke2SaX2swCC9XFeZ8pE1ydQqsiCjflONTQa7778N-sHtmgSskd8WDN48MoEcRbCY5QYCi4GZi87WihdxNtLOrZ2CH5G8*prn5nWbFdDPuLbH6N-uOqwFzvyZftmnB7&new=1 "论文原理介绍")
+
 大家感兴趣可以去看，这里不再累述。
 
    使用难度系数bits控制生成难度的大数的算法简介如下：
@@ -79,23 +87,23 @@ numbers. Sign is not really being used.
 
 4.运行**bytomd init --chain_id solonet** 和**bytomd node --minging**命令，在dashboard创建账户，几秒之后在命令行窗口会看见系统的运行信息，接着会得到类似下面的信息
 
-time="2018-05-18T11:57:11+08:00" level=info msg="false:bits=2305843009219929325"
-time="2018-05-18T11:57:15+08:00" level=info msg="HashToBig compareHash=94470935200285873636399503116117805657110739921871232222716960430331350467616"
-time="2018-05-18T11:57:15+08:00" level=info msg="false:bits=2305843009227381927"
-time="2018-05-18T11:57:16+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-time="2018-05-18T11:57:19+08:00" level=info msg="HashToBig compareHash=108924585367465724541234689522322789151382457823652479112133953258841671282258
-time="2018-05-18T11:57:19+08:00" level=info msg="false:bits=2305843009229476129"
-time="2018-05-18T11:57:23+08:00" level=info msg="HashToBig compareHash=14146428415876784558544863438470231118789865847836167107575618549870912614213"
-time="2018-05-18T11:57:23+08:00" level=info msg="false:bits=2305843009215743640"
-time="2018-05-18T11:57:26+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-time="2018-05-18T11:57:28+08:00" level=info msg="HashToBig compareHash=78934284042892087673033389266663287288908738737936067679514124013738943934592"
-time="2018-05-18T11:57:28+08:00" level=info msg="false:bits=2305843009225130808"
-time="2018-05-18T11:57:32+08:00" level=info msg="HashToBig compareHash=55786918064653409850632601440227606224276562392668699194595776719016165547098"
-time="2018-05-18T11:57:32+08:00" level=info msg="false:bits=2305843009221776966"
-time="2018-05-18T11:57:36+08:00" level=info msg="HashToBig compareHash=83666295500599103004856267657480156049537933326077567233384721054295899257191"
-time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"
-time="2018-05-18T11:57:36+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
-time="2018-05-18T11:57:40+08:00" level=info msg="HashToBig compareHash=22266069092978536339665292252171173599340934438903703233524897266085035107388"
+    time="2018-05-18T11:57:11+08:00" level=info msg="false:bits=2305843009219929325"
+    time="2018-05-18T11:57:15+08:00" level=info msg="HashToBig compareHash=94470935200285873636399503116117805657110739921871232222716960430331350467616"
+    time="2018-05-18T11:57:15+08:00" level=info msg="false:bits=2305843009227381927"
+    time="2018-05-18T11:57:16+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+    time="2018-05-18T11:57:19+08:00" level=info msg="HashToBig compareHash=108924585367465724541234689522322789151382457823652479112133953258841671282258
+    time="2018-05-18T11:57:19+08:00" level=info msg="false:bits=2305843009229476129"
+    time="2018-05-18T11:57:23+08:00" level=info msg="HashToBig compareHash=14146428415876784558544863438470231118789865847836167107575618549870912614213"
+    time="2018-05-18T11:57:23+08:00" level=info msg="false:bits=2305843009215743640"
+    time="2018-05-18T11:57:26+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+    time="2018-05-18T11:57:28+08:00" level=info msg="HashToBig compareHash=78934284042892087673033389266663287288908738737936067679514124013738943934592"
+    time="2018-05-18T11:57:28+08:00" level=info msg="false:bits=2305843009225130808"
+    time="2018-05-18T11:57:32+08:00" level=info msg="HashToBig compareHash=55786918064653409850632601440227606224276562392668699194595776719016165547098"
+    time="2018-05-18T11:57:32+08:00" level=info msg="false:bits=2305843009221776966"
+    time="2018-05-18T11:57:36+08:00" level=info msg="HashToBig compareHash=83666295500599103004856267657480156049537933326077567233384721054295899257191"
+    time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"
+    time="2018-05-18T11:57:36+08:00" level=info msg="bk peer num:0 sw peer num:0 []"
+    time="2018-05-18T11:57:40+08:00" level=info msg="HashToBig compareHash=22266069092978536339665292252171173599340934438903703233524897266085035107388"
 
 信息显示虽然挖矿失败了，但是通过运算我们可以得到很多适合本机难度的bits，每一个**time="2018-05-18T11:57:36+08:00" level=info msg="false:bits=2305843009225816433"**
 中的bits都适合本机难度，这个**bits**上面对应的**level=info msg="HashToBig compareHash=**后面这个值越大，难度系数就越低。
@@ -132,7 +140,8 @@ time="2018-05-18T11:57:40+08:00" level=info msg="HashToBig compareHash=222660690
 **CoinbasePendingBlockNumber = uint64(100)**交易需要的确认数可以改小一些。
 具体请自行研究。这一步不是必须的。
 
-8.如果感觉以上步骤比较麻烦，可以跳过步骤2，3和4，从步骤5开始直接修改bits的值，然后执行步骤6。即少修改一次代码和编译过程，直接使用步骤5中我已经测试好的bits.
+8.如果感觉以上步骤比较麻烦，可以跳过步骤2，3和4，从步骤5开始直接修改bits的值，然后执行步骤6。即少修改一次代码和编译过程，直接使用步骤5中我已经测试好的bits.  
+以上操作是针对使用命令行方式启动比原节点进行修改的，针对钱包桌面版的原理基本相同，需要使用钱包桌面版的请自行研究做相应替换。  
 
 9.最后再次说明一定提前备份好btm里自己的重要数据，主要是key,最好整个bytom文件夹做一下备份。这个方法适合于有一定go语言基础的
 程序员们，当然技术大牛们看了会见笑，觉得太简单了。费劲写这么多的主要目的是因为本人喜欢比原链，希望更多的人能够加入进来学习比原
