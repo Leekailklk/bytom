@@ -8,14 +8,14 @@
 
 1. **提前做好文件和钱包的备份。提前做好文件和钱包的备份。提前做好文件和钱包的备份。**  
   在不同的操作系统上，数据目录的位置也不同  
-  苹果系统(darwin)：~/Library/Bytom  
+  苹果系统(darwin):~/Library/Bytom  
   Windows(windows): ~/AppData/Roaming/Bytom  
-  其它（如Linux）：~/.bytom  
+  其它（如Linux）:~/.bytom  
   为了方便，可以把该目录下文件直接拷贝备份，然后**清空该目录（必须要清除原来文件）**。
 
 2. 挖矿的最终工作量证明在**bytom/consensus/difficulty/difficulty.go**
     
-// CheckProofOfWork checks whether the hash is valid for a given difficulty.
+   //CheckProofOfWork checks whether the hash is valid for a given difficulty.
    
      func CheckProofOfWork(hash, seed *bc.Hash, bits uint64) bool {
 	
@@ -52,7 +52,7 @@ numbers. Sign is not really being used.
   Actually it will be nicer to use 7 instead of 3 for robustness reason.
 
 这个算法本人没有详细研究，根据我的理解就是使用类似于**IEEE754**浮点数科学计数法而使用的二进制的大数科学计数法，即一个很大的数转化为
-一个小数乘以10的n次方的二进制表示，最后又把表示转化为十进制保存。
+一个小数乘以10的n次方的256进制表示，最后又把表示转化为十进制保存。
 
 在使用单机**solonet**测试网络时很难通过该工作量证明挖到矿，于是考虑在不影响整个程序功能的情况下尝试做小的修改可以在单机跑起来，
 有幸在比原技术微信群得到了几位大牛的指点，考虑修改难度系数bits,该系数在**bytom/config/genesis.go**文件中，初始值**Bits:2161727821137910632,**
