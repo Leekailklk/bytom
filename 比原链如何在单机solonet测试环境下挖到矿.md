@@ -8,9 +8,9 @@
 
 1. **提前做好文件和钱包的备份。提前做好文件和钱包的备份。提前做好文件和钱包的备份。**  
   在不同的操作系统上，数据目录的位置也不同  
-  苹果系统(darwin):~/Library/Bytom  
+  苹果系统(darwin): ~/Library/Bytom  
   Windows(windows): ~/AppData/Roaming/Bytom  
-  其它（如Linux）:~/.bytom  
+  其它（如Linux）: ~/.bytom  
   为了方便，可以把该目录下文件直接拷贝备份，然后**清空该目录（必须要清除原来文件）**。
 
 2. 挖矿的最终工作量证明在**bytom/consensus/difficulty/difficulty.go**
