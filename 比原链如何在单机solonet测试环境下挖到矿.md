@@ -1,4 +1,4 @@
-#比原链如何在单机solonet测试环境下挖到矿  
+# 比原链如何在单机solonet测试环境下挖到矿 #  
                                   
 ***
 （本人是初学者，行文简单和出错在所难免，请大家包涵。）
@@ -17,13 +17,13 @@
     
    //CheckProofOfWork checks whether the hash is valid for a given difficulty.
    
-     func CheckProofOfWork(hash, seed *bc.Hash, bits uint64) bool {
+ func CheckProofOfWork(hash, seed *bc.Hash, bits uint64) bool {
 	
-    compareHash := tensority.AIHash.Hash(hash, seed)
+compareHash := tensority.AIHash.Hash(hash, seed)
 	
-    return HashToBig(compareHash).Cmp(CompactToBig(bits)) <= 0
+return HashToBig(compareHash).Cmp(CompactToBig(bits)) <= 0
 
-    }
+}
 
 这个函数中，最终比较的是使用AI友好算法生成的随机哈希**tensority.AIHash.Hash(hash, seed)使用HashToBig（）**转化为一个大数，
 与预先设定好的一个难度的大数比较大小，这个大数由难度系数**bits**通过**CompactToBig(bits)**函数得出。即，这个函数最终比较**HashToBig(compareHash)**
